@@ -96,7 +96,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
        // pos = intent.getIntExtra("PlaceNumber", 0);
 
-        if (intent.getIntExtra("PlaceNumber", 0) == 0) {
+
+        if ( intent.getIntExtra("PlaceNumber", 0) == 0) {
             /// User Location
             locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
             locationListener = new LocationListener() {
@@ -141,6 +142,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
         } // Intend  END
+        else{
+
+            Location Placeloc = new Location(LocationManager.GPS_PROVIDER);
+
+            Placeloc.setLatitude(MainActivity.locations.get(intent.getIntExtra("PlaceNumber", 0)).latitude);
+            Placeloc.setLongitude(MainActivity.locations.get(intent.getIntExtra("PlaceNumber", 0)).longitude);
+
+           CenterMapOnLocation(Placeloc, MainActivity.places.get(intent.getIntExtra("PlaceNumber", 0)));
+
+         //  mMap.addMarker(new MarkerOptions().position(MainActivity.locations.get(intent.getIntExtra("PlaceNumber", 0))).title(MainActivity.places.get(intent.getIntExtra("PlaceNumber", 0))));
+        }
 
     } /// onMapReady End
 
